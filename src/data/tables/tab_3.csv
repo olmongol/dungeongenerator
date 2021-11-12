@@ -1,0 +1,6 @@
+roll,result ,connector
+14,The corridor ends in a door that opens into the room,door
+19,The corridor opens into the room.,direct_access
+84,End the corridor in a blank wall.,wall
+96,End the corridor in a secret door that opens into the room.,secred_door
+99,End the corridor in a secret one-way door that only allows passage from the room into the corridor.,secred_door

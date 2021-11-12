@@ -1,0 +1,5 @@
+roll,result ,connector
+29,The door opens into the room anyway.,room
+79,Eliminate the door. Replace it with a blank wall.,wall
+94,Replace the door with a secret door.,secred_door
+99,Replace the door with a secret one- way door. The new door only opens out from the room.,secred_door

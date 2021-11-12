@@ -1,0 +1,6 @@
+roll,result ,connector
+19,The current corridor deadends at the obstructing one without entering.,dead-end
+39,The current corridor enters the ob structing one.,connection
+69,The current corridor ends in a door that opens into the obstructing corridor.,door
+79,"The current corridor ends in a one- way door that opens into the o b structing corridor but is hidden on that side (it is a secret door on that side, but even if it is found, it cannot be opened from that side).",door
+99,The current corridor ends in a secret door that opens into the obstructing corridor.,secred_door

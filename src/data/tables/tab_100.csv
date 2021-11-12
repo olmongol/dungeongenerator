@@ -1,0 +1,7 @@
+roll,result ,length_even,length_odd
+4,Extremely Tight,20,20
+39,Tight,20,30
+64,Normal,30,30
+84,Moderately Loose,30,40
+94,Loose,40,40
+99,Extremely Loose,40,50
