@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 '''!
-\file /home/mongol/git/dungeongenerator/src/toolbox/roombuilder.py
 \package toolbox.roombuilder
+
 \brief Tools for building/handling rooms
 
 
@@ -11,13 +11,23 @@
 \author Marcus Schwamberger
 \email marcus@lederzeug.de
 \version 0.1
+
+@todo the following has to be fully implemented
+- class for rooms
+- class for corridors
+- class for doors/access points
+- class for random table handling
+- class for encounter handling/interface
+- class for treaure handling/interface
+- class for map drawing (SVG)
+. LaTeX output
 '''
 import json
 import os
 from toolbox.logbox import *
 from toolbox.confbox import *
 __version__ = "0.1"
-__updated__ = "11.11.2021"
+__updated__ = "14.11.2021"
 __author__ = "Marcus Schwamberger"
 
 cfg = handleConf()
@@ -33,7 +43,7 @@ class room():
     ----
     @todo this has to be fully implemented:
     A room object should have the following attributes:
-    - ID
+    - ID (R##)
     - room type
     - inhabitants
     - treasures

@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 '''!
-\file /home/mongol/git/dungeongenerator/src/toolbox/generaltools.py
 \package toolbox.generaltools
-\brief This package contains general functions needed for the dungeon generator.
+\brief General purpose tool kit
 
-lorem ipsum
+In this module are alle the tools of more or less 'general purpose' collected.
 
 \date (c) 2021
 \copyright GNU V3.0

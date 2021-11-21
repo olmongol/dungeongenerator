@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 '''!
 \package toolbox.confbox
-\file confbox.py
 
 \brief A toolbox of things to handle config files.
 
@@ -20,7 +19,7 @@ from toolbox.logbox import*
 
 __author__ = "Marcus Schwamberger"
 __version__ = "0.1"
-__updated__ = "11.11.2021"
+__updated__ = "12.11.2021"
 
 logger = createLogger(logger = 'confbox',
                       loglvl = 'warning',

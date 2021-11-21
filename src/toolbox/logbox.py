@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 '''!
-\package toolbox
-\file logbox.py
+\package toolbox.logbox
 
 \brief a module with logging tools
 
@@ -16,7 +15,7 @@ import logging.handlers
 
 __version__ = "0.4"
 __author__ = "Marcus Schwamberger"
-__updated__ = "11.11.2021"
+__updated__ = "12.11.2021"
 
 #Debugging level
 LEVEL = {'debug': logging.DEBUG,
