@@ -1,0 +1,69 @@
+{
+    "ID": "R-0",
+    "room type": "living quarter",
+    "inhabitants": {
+        "A": [],
+        "B": [],
+        "C": [],
+        "D": [],
+        "E": [],
+        "F": [],
+        "G": []
+    },
+    "Description": "This is just a generic rectangular room 10-20 units x 5-15 units",
+    "origin": [
+        0,
+        0
+    ],
+    "corners": [
+        [
+            0,
+            "y=10-20"
+        ],
+        [
+            "x=5-15",
+            0
+        ],
+        [
+            "x",
+            "y"
+        ]
+    ],
+    "treasure": {
+        "A": [],
+        "B": [],
+        "C": [],
+        "D": [],
+        "E": [],
+        "F": [],
+        "G": []
+    },
+    "access point": {
+        "number": [
+            "1-4",
+            "door"
+        ],
+        "doors": [],
+        "openings": []
+    },
+    "box coords": [
+        [
+            0,
+            0
+        ],
+        [
+            0,
+            "y=10-20"
+        ],
+        [
+            "x=5-15",
+            0
+        ],
+        [
+            "x",
+            "y"
+        ]
+    ],
+    "assets": [],
+    "name": "Generic Room"
+}
