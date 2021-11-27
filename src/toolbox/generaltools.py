@@ -15,8 +15,10 @@ __version__ = "0.1"
 __updated__ = "12.11.2021"
 __author__ = "Marcus Schwamberger"
 
+from math import trunc
 import random as rd
 import csv
+import os
 
 
 
@@ -31,7 +33,41 @@ def dice(sides = 100, start = 1):
 
     return rd.randint(start, sides)
 
+def roll():
+    """!
+    This functions simulates a d100 roll with two d10 and delivers the result.
 
+    @return a random numbers from 00 to 99.
+    """
+    tens = rd.randint(0,9) * 10
+    ones = rd.randint(0,9)
+    return tens+ones
+
+
+def getIntOfNumber(number):
+    """!
+    This functions checks if its parameter is an instance of float or int and return its integer value. Floating point numbers will be truncated towards zero.
+    Raises ValueError otherwise.
+
+    @param number
+    @raise ValueError if parameter is neither float nor int
+    @return int value of the number. Floating point numbers will be truncated towards zero.
+    """
+    if (not isinstance(number,(float,int))):
+        raise ValueError(f"Parameter is not a number - {type(number)} = {number}")
+    elif isinstance(number, float):
+        number = trunc(number)
+    return number
+
+# function to load all kinds of table csv files
+def textFileReader(tablenumber = 100):
+    """!
+    This functions reads a csv file that represents a table by its table number and returns the file content:
+
+    @param number of table to load suitable csv filename
+    @return csv file content
+    """
+    return open(os.path.join("./src/data/tables","tab_"+str(tablenumber)+".csv"), "r")
 
 def readTable(filename = ""):
     """!
