@@ -124,7 +124,7 @@ class blankWindow(object):
     def _helpAbout(self):
         '''
         This method just opens a message window with the basic
-        information about the rpg-tools XML Generator (like version and
+        information about the Room Prototype Generator (like version and
         copyright)
         '''
         self.about = "%s\nVersion %s\n\n%s\n%s\n%s" % (__me__,

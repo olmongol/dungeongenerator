@@ -19,13 +19,13 @@ from toolbox.logbox import*
 
 __author__ = "Marcus Schwamberger"
 __version__ = "0.1"
-__updated__ = "12.11.2021"
+__updated__ = "28.11.2021"
 
 logger = createLogger(logger = 'confbox',
-                      loglvl = 'warning',
+                      loglvl = 'debug',
                       logsize = '2 MB',
                       count = 2,
-                      logpath = glob.glob('../**/log/')[0],
+                      logpath = glob.glob('./**/log/')[0],
                       logfile = 'confbox.log')
 
 
@@ -36,12 +36,19 @@ class handleConf():
     """
 
 
-    def __init__(self):
+    def __init__(self, configfile = ""):
         """!
         Class constructor: starts search for config file and then implies the
         reading of it.
+        @param configfile holds the path to the configfile to be read
         """
-        self.configfile = self.__getCfile()
+
+        if configfile:
+            self.configfile = configfile
+
+        else:
+            self.configfile = self.__getCfile()
+        logger.debug(f"self.configfile = '{self.configfile}'")
         self.readCfg()
 
 

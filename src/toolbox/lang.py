@@ -22,7 +22,7 @@ Currently supported languages are:
 @license GNU V3.0
 '''
 __version__ = "1.1"
-__updated__ = "03.11.2021"
+__updated__ = "28.11.2021"
 ##
 # @var supportedrpg
 # Supported RPG systems
@@ -332,12 +332,14 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                      'en': {'lang': 'Preferences',
                              }
                      },
-           'help':{'de': {'about': u'\über rpg-tools',
+           'help':{'de': {'about': 'über Dungeon Generator',
+                          'about_rc':"über Room Constructor",
                              'page': u'über diese Seite',
                              'win': u'über dieses Fenster',
                              'global': 'Handbuch',
                              },
-                     'en': {'about': 'About rpg-tools',
+                     'en': {'about': 'About Dungeon Generator',
+                            "about_rc":"About Room Constructor",
                              'page': 'About this page',
                              'win': 'About this window',
                              'global': 'Handbook',
