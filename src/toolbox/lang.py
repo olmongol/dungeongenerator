@@ -22,7 +22,7 @@ Currently supported languages are:
 @license GNU V3.0
 '''
 __version__ = "1.1"
-__updated__ = "28.11.2021"
+__updated__ = "30.11.2021"
 ##
 # @var supportedrpg
 # Supported RPG systems
@@ -364,6 +364,9 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                               "ed_rem_enemy": "Feinde entfernen",
                               'init': "Initativewurf",
                               "history": "Verlauf anzeigen",
+                              "draw room": "Raum zeichnen",
+                              "add spec": "Besonderheit hinzufügen",
+                              "add param": "Parameter himzufügen§",
                               },
                       'en':{'ed_char': 'Edit/improve Character',
                               'ed_grp': 'Edit Group',
@@ -383,6 +386,9 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                               "ed_rem_enemy": "remove enemies",
                               'init': "Initiative roll",
                               "history": "display history",
+                              "draw room":"draw toom",
+                              "add spec": "add special",
+                              "add param": "add parameter",
                                },
 
                       },
@@ -514,50 +520,11 @@ shortcut = {'de': 'Deutsch',
 wintitle = {'opt_lang': {'de': 'Spracheinstellungen',
                           'en': 'Language Settings',
                           },
-            'main': {'de': 'Rollenspiel Werkzeuge',
-                          'en': 'RPG Tools',
-                          },
-            'edit': {'de': 'Charakter-Editor',
-                          'en': 'Character Editor',
-                          },
-            'background': {'de': 'Charakter Hintergrund-Editor',
-                          'en': 'Character Background Editor'
-                        },
-            'history': {'de': 'Editor Hintergrundgeschichte',
-                        'en': 'Character\'s History'
-                        },
-            'backpack': {'de': 'Rucksack',
-                          'en': 'Backpack'
-                          },
-            'item_store': {'de': 'Kramladen',
-                            'en': 'Item Store'
-                            },
-            'calc_exp': {'de': 'EP Rechner',
-                          'en': 'EP Calculator'
-                          },
-            'rm_charg': {'de': 'RM Charaktergenerator',
-                          'en': 'RM Character Generator'
-                          },
-            'mers_charg': {'de': 'MERS Charaktergenerator',
-                            'en': 'MERP Character Generator'
-                           },
-            'rm_create': {'de': "RM Charaktergenerierung",
-                           'en': 'RM Character Builder'
-                           },
-            'rm_spells': {'de': 'RM Spruchlisteneditor',
-                           'en': 'RM Spell List Editor'
-                           },
-            'rm_statgain': {'de': "RM Attributssteigerungen",
-                            'en': "RM Stat Gain Rolls"
-                            },
-            'rm_groupEP': {'de': u"Gruppen EP Übersicht",
-                            'en': 'Group EP Overview'
-                            },
-            'rm_maneuver': {"de": "Manöverproben",
-                            'en': 'Maneuver Window'
-                            },
-            'rm_RR': {'de': 'Widerstandswurf',
-                       'en': 'Resistance Roll'},
+            'main': {'de': 'Dungeon Generator',
+                     'en': 'Dungeon Generator',
+                     },
+            'room builder': {'de': 'Raum Prototyp Generator',
+                              'en': 'Room Prototype Constructor'}
             }
 
 ## @var labels
@@ -600,58 +567,23 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
                        'en': 'Preview',
                        },
           'name': {'de': 'Name',
-                        'en': 'Name'
-                        },
-          'dp_costs': {'de': 'DP Kosten',
-                        'en': 'DP costs'
-                        },
-          'progr': {'de': 'Steigerung',
-                     'en': 'progression'
-                     },
-          'ranks': {'de': 'Stufen',
-                     'en': 'ranks'
-                     },
-          'total': {'de': 'gesamt',
-                     'en': 'total'
-                     },
+                   'en': 'Name'
+                   },
+          'label': {'de': 'Bezeichnung',
+                    'en': 'Label'
+                    },
           'new_val': {'de': 'neuer Wert',
                        'en': 'new value'
                        },
           'count':{'de': 'Anzahl',
                     'en': 'count'
                     },
-          'player': {'de': "Spieler",
-                     'en': "Player"
-                     },
-          'prof':{'de': "Beruf",
-                   'en': "Profession"
-                   },
           'lvl': {'de': "Stufe",
                   'en': 'Level'
                   },
-          'new_ep': {'de': 'neue EP',
-                     'en': 'new EP'
-                     },
           'comment':{'de': 'Kommentar',
                       'en': 'Comment'
                       },
-          'lvl_enemy': {'de': 'Stufe Gegner',
-                         'en': 'Level enemy'
-                         },
-          'kill': {'de': u'Tötung',
-                    'en':'kill'
-                    },
-          'diary':{'de':'Tagebuch',
-                    'en': 'Diary'},
-          'win_man':{'de': u"Manöverfenster",
-                      'en': "maneuver window"
-                      },
-          'win_casting': {'de': "Zauber wirken (Fenster)",
-                           'en': "spell casting (window)"
-                           },
-          'win_fight': {'de': 'Kampf-Fenster',
-                         'en': 'Fighting window'
-                         },
           'modifier': {'de': "Modifikator",
                         "en": "modifier"
                         },
@@ -673,11 +605,6 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
           'spellbook':{'de': "Zauberbuch",
                         'en': "Spellbook"
                         },
-          'MMP': {'de': "BMM",
-                   'en': "MMP"
-                   },
-          "MMP_long": {'de': u"Bewegungsmanövermod.",
-                        'en': "Movement Maneuver Penalty"},
           "item":{"de": "Gegenstand",
                    "en": "Item"
                    },
@@ -685,49 +612,8 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
                     'en': 'cost'},
           "weight":{"de": "Gewicht",
                      "en": "weight"},
-          "gear shop": {'de': "Kramladen",
-                         "en": "General Store"},
-          "weapon shop": {'de': 'Waffenschmied',
-                          'en': 'Weapon Smith'},
-          "armor shop": {'de': u"Rüstungsbauer",
-                         'en': "armor maker"},
-          "services shop": {'de': u'Markt & Kneipe',
-                         'en': u'Grocery  & Pub'},
-          "gems shop": {"de":"Juwelier",
-                         "en":"Gems & jewelry Shoppe"},
-          "transport shop": {"de": "Transport & Viehmarkt",
-                              "en": "transports & Animal Market"},
-          "herbs shop":{"de":u"Kräuterladen",
-                         "en":"herbs shoppe"},
-          "magic shop": {'de': u"Magiekrämer",
-                          'en': "The Magical Shoppe"},
-          'bonus item': {"de": u'Bonusgegenstände und Gewichtsreduktion',
-                         "en": "bonus items and reduced weight"},
-          "charged item": {"de": u"aufgeladene magische Gegenstände",
-                            "en": "charged magical items"},
-          "daily item":{"de":u"täglich verwendbare Gegenstände",
-                         "en": "daily items"},
-          "perm item": {"de": u"permanente magische Gegenstände",
-                         "en": "permanent magical items"},
-          "bonus c/s":{"de": "Bonus Kat/Talent",
-                        "en": "Bonus cat/skill"},
-          "realm":{"de": "Magiebereich",
-                    "en": "realm",
-                    },
-          'spell list': {"de": "Spruchliste",
-                         "en": "Spell List"},
-          'spell':{"de": "Zauberspruch",
-                    "en": "Spell"},
-          "lvl":{"de": "Stufe",
-                  "en": "level"},
-          "daily":{"de":u"täglich",
-                    "en": "daily"},
-          "spell adder":{"de": "Spruchvermehrer",
-                          "en": "Spell Adder"},
-          "pp mult":{"de": "Magiepunktevermehrer",
-                      "en": "PP Multiplier"},
           "type":{"de":"Typ",
-                   "en": "Type"},
+                   "en": "type"},
           "loads":{"de": "Ladungen",
                     "en": "Charges"},
           "geartype": {"de": u"Art der Ausrüstung",
@@ -737,63 +623,30 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
           "location": {"de": "Ort",
                        "en": "Location"},
           "skill":{"de": "Talent",
-                    "en": "Skill"},
+                    "en": "skill"},
           "region": {"de": "Gegend",
-                      "en": "Region"
+                      "en": "region"
                       },
           "locale": {"de": "Umgebung",
-                      "en": "Environment"
+                      "en": "environment"
                       },
           "climate": {"de": "Klima",
-                       "en": "Climate"
+                       "en": "climate"
                        },
-          "attacker": {"de": "Angreifer",
-                        "en": "Attacker"
-                        },
-          "defender": {"de": "Verteidiger",
-                        "en": "Defender"
-                        },
-          "target": {"de": "Ziel",
-                      "en": "Target"
-                      },
-          'skill':{'de': 'Fertigkeit',
-                    'en': 'Skill'
-                    },
-          'attack table':{'de': "Angriffstabelle",
-                           "en": "Attack Table"
-                           },
-          'crit table': {"de": "Kritische Treffer Tabelle",
-                          "en": "Critical Table"
-                          },
-          "weapon":{"en": "Weapon",
+          "weapon":{"en": "weapon",
                      "de": "Waffe"
                      },
-          "attack lvl": {"de":"Angriffsstufe",
-                         "en": "Attack Level",
-                         },
           "success": {"de": "Erfolg",
-                       "en":"Success",
+                       "en":"success",
                        },
           "fail": {"de": "Fehlschlag",
-                    "en": "Failure",
+                    "en": "failure",
                     },
-          "with":{'de': "mit Gegenstand",
-                   'en': "with item"
-                   },
-          "without": {'de': "ohne Gegenstand",
-                       "en": "without item"},
-          "stunned": {"de": "benommen",
-                      "en": "stunned",
-                      },
-          'parry': {'de': "nur parrieren",
-                    'en': 'only parry'
-                    },
-          'no_parry':{'de':"nicht parrieren",
-                      'en':"no parry"
-                      },
-          'ooo':{'de': "außer Gefecht",
-                 'en': 'knocked out'
-                 },
+          "room types":{"de":["allgemeiner Raum", "Wohnquartier", "Militärraum", "Handwerksraum"],
+                         "en": ["general room", "living quarter", "military room", "crafts room"]},
+          "corners": {"de": "Ecken",
+                      "en": "corners"}
+
           }
 
 invedtacts = {"de": [u"wählen", u"ausgerüstet", "unausgerüstet"],
