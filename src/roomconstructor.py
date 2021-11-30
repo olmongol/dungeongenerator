@@ -19,7 +19,8 @@ __me__ = "room prototype constructor"
 
 import json
 import os
-from tkinter import filedialog
+import tkinter as tk
+from tkinter import filedialog, Text
 from tkinter.ttk import Combobox
 from pprint import pprint
 from gui.window import *
@@ -245,6 +246,39 @@ class rgWindow(blankWindow):
                                    textvariable = self.selectType,
                                    values = labels["room types"][self.lang])
         self.__typeCombo.grid(row = 0, column = 5, sticky = W)
+
+        Label(self.window,
+              text = f" {labels['shape'][self.lang]}:"
+              ).grid(row = 0, column = 6, sticky = W)
+        self.selectShape = StringVar()
+        self.selectShape.set(self._genericroom["shape"])
+        self.__shapeCombo = Combobox(self.window,
+                                   textvariable = self.selectShape,
+                                   values = labels["room shape"][self.lang]
+                                   )
+        self.__shapeCombo.grid(row = 0, column = 7, sticky = "EW")
+
+        #---------- row 1
+        Label(self.window,
+              text = f" {labels['size'][self.lang]} ({labels['sbox'][self.lang]}):"
+              ).grid(row = 1, column = 0, columnspan = 2, sticky = W)
+        self
+        #---------- row 2
+        Label(self.window,
+              text = f"{labels['description'][self.lang]}:"
+              ).grid(row = 2, column = 0, sticky = "WS")
+        #---------- row 3
+        #self.description = StringVar()
+        #self.description.set(self._genericroom["description"])
+        self.__descrText = Text(self.window,
+                                height = 20,
+                                width = 90
+                                )
+        self.__descrText.grid(row = 3, column = 0,
+                                       columnspan = 8,
+                                       sticky = "NEWS")
+        #self.__descrText.insert(tk.END, self._genericroom["description"])
+        self.__descrText.insert(END, self._genericroom["description"])
 
 
 

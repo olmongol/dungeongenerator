@@ -645,8 +645,23 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
           "room types":{"de":["allgemeiner Raum", "Wohnquartier", "Militärraum", "Handwerksraum"],
                          "en": ["general room", "living quarter", "military room", "crafts room"]},
           "corners": {"de": "Ecken",
-                      "en": "corners"}
-
+                      "en": "corners"
+                      },
+          "room shape": {"de": ["Rechteck", "Oval", "Kreis", "Oktagon", "Polygon"],
+                        "en": ["rectangle", "oval", "circle", "oktagon", "polygon"],
+                       },
+          "shape": {"de": "Umriss",
+                    "en": "shape"
+                    },
+          "description": {"de": "Beschreibung",
+                          "en": "description"
+                          },
+          "size": {"de":"Größe",
+                   "en": "size"
+                   },
+          "sbox":{"de": "umgebender Kasten",
+                   "en": "surrounding box"
+                   },
           }
 
 invedtacts = {"de": [u"wählen", u"ausgerüstet", "unausgerüstet"],
