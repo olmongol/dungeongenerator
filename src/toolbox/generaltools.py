@@ -7,13 +7,13 @@ In this module are alle the tools of more or less 'general purpose' collected.
 
 \date (c) 2021
 \copyright GNU V3.0
-\author Marcus Schwamberger
+\author Marcus Schwamberger, mambano
 \email marcus@lederzeug.de
 \version 0.1
 '''
-__version__ = "0.1"
-__updated__ = "12.11.2021"
-__author__ = "Marcus Schwamberger"
+__version__ = "0.2"
+__updated__ = "30.11.2021"
+__author__ = "Marcus Schwamberger, mambano"
 
 from math import trunc
 import random as rd
@@ -38,6 +38,9 @@ def roll():
     This functions simulates a d100 roll with two d10 and delivers the result.
 
     @return a random numbers from 00 to 99.
+    
+    @todo the following has to be fully implemented
+    - add logging?
     """
     tens = rd.randint(0,9) * 10
     ones = rd.randint(0,9)
@@ -54,20 +57,35 @@ def getIntOfNumber(number):
     @return int value of the number. Floating point numbers will be truncated towards zero.
     """
     if (not isinstance(number,(float,int))):
-        raise ValueError(f"Parameter is not a number - {type(number)} = {number}")
+        raise TypeError(f"Parameter is not a number - {type(number)} = {number}")
     elif isinstance(number, float):
         number = trunc(number)
     return number
 
-# function to load all kinds of table csv files
-def textFileReader(tablenumber = 100):
+# function to load all kinds of files open() can
+def textFileReader(tablenumber:int, sourceFolder:str = "tables", fileExtension:str = ".csv"):
     """!
-    This functions reads a csv file that represents a table by its table number and returns the file content:
+    This functions reads a file and returns the file content.
+    By default a csv file will be loaded from table source folder, where each table is identified with its table number.
 
-    @param number of table to load suitable csv filename
-    @return csv file content
+    @param tablenumber to load suitable csv filename, which contains that number. Leave blank if you do not want to load a table.
+    @param sourceFolder where to finde the file
+    @param fileExtension of the file to be loaded
+    @return file content
+
+    @todo the following has to be fully implemented
+    - add logging
+    - add json file name syntax
+    - add reading base path from configuration
     """
-    return open(os.path.join("./src/data/tables","tab_"+str(tablenumber)+".csv"), "r")
+    # initialize variable
+    filename = ""
+    
+    # if tablenumber is an integer a table with that table number should be loaded. Apply filename syntax for it.
+    if isinstance(tablenumber, int): filename = "tab_"+str(tablenumber)
+    
+    # open file and return it
+    return open(os.path.join("./src/data",sourceFolder,filename+fileExtension), "r")
 
 def readTable(filename = ""):
     """!
