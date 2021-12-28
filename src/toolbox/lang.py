@@ -17,12 +17,12 @@ Currently supported languages are:
 
 @author Marcus Schwamberger
 @email marcus@lederzeug.de
-@date (c) 2015-2021
+@date (c) 2015-2022
 @version 1.1
 @license GNU V3.0
 '''
 __version__ = "1.1"
-__updated__ = "30.11.2021"
+__updated__ = "28.12.2021"
 ##
 # @var supportedrpg
 # Supported RPG systems
@@ -55,9 +55,9 @@ screenmesg = {'welcome': {'de': "Willkommen bei den RPG-Tools",
                                       'Konfiguration gefunden. Diese bitte '\
                                       'erst einmal beseitigen, damit ge'\
                                       'speichert werden kann!',
-                               'en': 'Found the following loops in your '\
-                                      'configuration. Please remove them '\
-                                      'first that the structure can be stored!'
+                       'en': 'Found the following loops in your '\
+                              'configuration. Please remove them '\
+                              'first that the structure can be stored!'
                                },
               'epwins_no_dp': {'de': "Es sind nicht mehr genug DPs da!!\n"\
                                        "Bitte so verteilen, dass sie nicht weniger"\
@@ -83,64 +83,6 @@ winhelpmsg = {"genAttrWin":{"de": u"Mit 'Würfeln' kann man dreimal sein Glück 
                                     " 1. enter names\n2. chose race\n3. choose culture\n4. choose profession \n5. choose magic realm (if you have the opportunity)\n6. fill in the temp fields for you attributes. " +
                                     "Clicking the 'calculate' button will calculate the remaining points you have left.\n7. when you have finished distributing points click 'next"},
                             }
-##
-# @var charattribs
-# This holds speciffic character attributes/parameter.,
-charattribs = { 'sex': {'de': 'Geschlecht',
-                         'en': 'Sex'
-                        },
-                'hair': {'de': "Haare",
-                         'en': "Hair"
-                         },
-                'skin': {'de': "Haut",
-                          'en': 'Skin',
-                         },
-                'eyes': {'de': "Augen",
-                          'en': "Eyes"
-                          },
-                'skin': {'de': 'Haut',
-                          'en': 'Skin'
-                          },
-                'height': {'de': u'Größe',
-                           'en': 'Height'
-                           },
-                'weight': {'de': 'Gewicht',
-                           'en': 'Weight'
-                           },
-                'app_age': {'de': 'Scheinbares Alter',
-                            'en': 'Apparent Age'
-                            },
-                'act_age': {'de': 'Echtes Alter',
-                            'en': 'Actual Age'
-                            },
-                'parents': {'de': "Eltern",
-                            'en': 'Parents'
-                            },
-                'siblings': {'de': 'Geschwister',
-                             'en': 'Siblings'
-                             },
-                'partner': {'de': 'PartnerIn',
-                            'en': 'Partner'
-                            },
-                'kids': {'de': 'Kinder',
-                         'en': 'Children'
-                         },
-                'deity': {'de': 'Gottheit',
-                          'en': 'Deity'
-                          },
-                'pers':{'de': u'Persönlichkeit',
-                         'en': 'Personality'
-                         },
-                'motiv': {'de': 'Motivation',
-                          'en': 'Motivation'
-                          },
-                'home': {'de': 'Heimatort',
-                         'en': 'Hometown'
-                         },
-                'carr_weight': {'de': 'getragenes Gewicht',
-                                'en': 'carried weight'
-                                }
-                }
 
 ## @var txtbutton
 #This holds the texts written on buttons.
@@ -180,10 +122,10 @@ txtbutton = {'but_ok': {'de': 'OK',
              'but_refr': {'de': 'zeigen/auffrischen',
                            'en': 'show/refresh'
                            },
-             'but_take': {'de': '\xc3\x9cbernehmen',
+             'but_take': {'de': 'übernehmen',
                            'en': 'submit'
                            },
-             'but_roll':{'de': 'w\xc3\xbcrfeln',
+             'but_roll':{'de': 'würfeln',
                           'en': 'roll dice'
                           },
              'but_calc':{'de': "berechnen",
@@ -195,32 +137,11 @@ txtbutton = {'but_ok': {'de': 'OK',
              'but_ren':{'de': 'umbenennen',
                           'en': 'rename'
                           },
-             'but_story': {'de': 'Hintergrundgeschichte',
-                           'en': u'Background\nStory'
-                           },
              'but_all': {'de': u'alles auswählen',
                          'en': 'select all'
                          },
              'but_none': {'de': u'nichts auswählen',
                           'en': 'select none'
-                          },
-             'but_save_char': {'de': "Character(e) speichern",
-                                'en': "save character(s)"
-                                },
-             'but_save_grp': {'de': "Gruppe speichern",
-                               'en': 'save group'
-                               },
-             'but_result': {'de': "Ergebnis ermitteln",
-                            'en': 'check result'
-                            },
-             'but_buy':{"de": "kaufen",
-                         'en': 'buy'
-                         },
-             'but_sell':{"de": "verkaufen",
-                          "en": "sell"
-                          },
-             'but_away':{'de': "wegwerfen",
-                          'en': 'throw away'
                           },
              'but_edit': {"de": "bearbeiten",
                            "en": "edit"
@@ -228,18 +149,7 @@ txtbutton = {'but_ok': {'de': 'OK',
              "but_details": {"de":"Details",
                               "en":"details"
                               },
-             'but_magic': {"de": "verzaubern",
-                            "en": "enchant"
-                            },
-             'but_rr': {'de': 'Widerstandswurf',
-                       'en': 'Resistance Roll'
-                       },
-             'but_dmg':{'de': "Schaden berechnen",
-                        'en': "apply damage"
-                        },
-             'but_nxtrd': {'de': 'nächste\n Runde',
-                           'en': 'next\n round',
-                           },
+
              }
 
 ## @var txtmenu
@@ -300,11 +210,6 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                           'sv_item': "Ggst im Laden speichern",
                           'quit': 'Beenden',
                           'export': 'Exportieren',
-                          'new_char': 'Neuer Charakter',
-                          'new_grp': 'Neue Charaktergruppe',
-                          'open_char': 'Charakterdatei öffnen',
-                          'open_party': u'Charaktergruppe öffnen',
-                          'open_enemy': u'Gegnergruppe öffnen',
                           'print': 'Drucken',
                           'pdf': "PDF erstellen",
 
@@ -317,11 +222,6 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                           'sv_item': "save item in shop",
                           'quit': 'Quit',
                           'export': 'Export',
-                          'new_char': "New character",
-                          'new_grp': "New character party",
-                          'open_file': 'Open Character file',
-                          'open_party': 'Open Character Group file',
-                          'open_enemy': 'Open Enemy Group file',
                           'print': 'Print',
                           'pdf': "PDF generation",
 
@@ -351,18 +251,6 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                               'ed_other': 'EPs Zauber,Reisen, Man\xc3\xb6ver',
                               'ed_indiv': 'Ideen-EPs',
                               'ed_calc': 'Zusammenrechnen',
-                              'ed_sim': 'Kampfsimulation (EP)',
-                              'ed_equip': 'Ausr\xc3\x9cstung verwalten',
-                              'add_pic': u'Charakterbild hinzufügen',
-                              'char_back': 'Hintergrundwerte erstellen/editieren',
-                              'add_story': 'Hintergrundgeschichte schreiben/editieren',
-                              'statgain': u'Attributsveränderungswurf',
-                              'show_char': 'Charakteransicht',
-                              'ed_EP': "EPs editieren",
-                              'ed_BGO': "Hintergrundoptionen",
-                              "ed_add_enemy": u"Feinde hinzufügen",
-                              "ed_rem_enemy": "Feinde entfernen",
-                              'init': "Initativewurf",
                               "history": "Verlauf anzeigen",
                               "draw room": "Raum zeichnen",
                               "add spec": "Besonderheit hinzufügen",
@@ -374,88 +262,14 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                               'ed_other': 'EPs for Spells,Travel,Maneuver',
                               'ed_indiv': 'EPs for ideas',
                               'ed_calc': 'Calculate all',
-                              'ed_sim': 'EPs for fight simulation',
-                              'ed_equip': 'Edit equipment',
-                              'add_pic': "add character picture",
-                              'char_back': 'edit background',
-                              'add_story': "add/edit background story",
-                              'statgain': 'Stat Gain Roll',
-                              'ed_EP': "edit EPs",
-                              'ed_BGO': 'background options',
-                              "ed_add_enemy": "add enemies",
-                              "ed_rem_enemy": "remove enemies",
-                              'init': "Initiative roll",
                               "history": "display history",
-                              "draw room":"draw toom",
+                              "draw room":"draw room",
                               "add spec": "add special",
                               "add param": "add parameter",
                                },
 
                       },
-           'select': {'bgo_lang': {'de': u'HO zusätzliche Sprachen',
-                                     'en': 'BGO extra Languages'
-                                     },
-                        'bgo_items': {'de': 'HO besondere Gegenstände',
-                                       'en': 'BGO Special Items'
-                                       },
-                        'bgo_money': {'de': u'HO zusätzliches Geld',
-                                       'en': 'BGO extra Money'
-                                       },
-                        'bgo_stats': {'de': u'HO Attributswürfe',
-                                       'en': 'BGO Stat Gain Rolls'
-                                       },
-                        'bgo_spec_skill': {'de': "HO besonderer Talentbonus",
-                                           'en': "BGO special skill bonus"
-                                           },
-                        'bgo_spec_cat': {'de': 'HO besonderer Kategoriebonus',
-                                          'en': 'BGO special category bonus'
-                                          },
-                        'bgo_talents': {'de': u"HO besondere Talente/Mängel",
-                                         'en': 'BGO special talents/flaws'}
-                       },
-           'items': {'de': {'treasure': "Schatz generieren",
-                              'magical': "Magische Gegenst\xc3\xa4nde erzeugen",
-                              'itemgen': " [Gegenstandsliste wird auf knopfdruck erzeugt] ",
-                              'magicgen': " [Magischer Gegenstand wird auf Knopfdruck erzeugt] ",
-                              },
-                      'en': {'treasure': "Create treasure",
-                              'magical': "Create magic items",
-                              'itemgen': " [List of items will be generated when button is pressed] ",
-                              'magicgen': " [Magic item will be generated when button is pressed] ",
-                              },
-                      },
-           'group': {'de': {'add/rem': "Charakter hinzuf\xc3\xbcgen/entfernen",
-                              'new': "Neue Charaktergruppe",
-                              'gmview': u"Spielleiterübersicht",
-                              },
-                      'en': {'add/rem': "Add/remove characters",
-                              'new': "New party",
-                              'gmview': "Gamemaster's overview",
-                              },
-                      },
-           'inventory': {'de': {"armor": u'Rüstung',
-                                   "weapon": "Waffen",
-                                   "gear": u'Ausrüstung',
-                                   "herbs": "Kräuter/Tränke/Gifte",
-                                   "gems": "Schmuck/Juwelen/Edelsteine",
-                                   "spells": u"Runenpapier/Zauberstäbe",
-                                   "daily": u'täglich verwendbare Ggst.',
-                                   "PP_spell": "MP-Vermehrer/Zaubervermehrer",
-                                   'transport': "Tiere und Transporte",
-                                   'services': "Nahrung und Dienstleistungen",
-                                   },
-                           'en': {"armor": 'Amor',
-                                   "weapon": "Weapons",
-                                   "gear": 'Equipment',
-                                   "herbs": "Herbs/Potions/Poisons",
-                                   "gems": "Jewelry/Gems",
-                                   "spells": u"Runepaper/Wands/Rods",
-                                   "daily": u'daily Items',
-                                   "PP_spell": "PP-Multiplier/Spelladder",
-                                   'transport': "Animals and Transports",
-                                   'services': 'Food and Services',
-                                   },
-                           },
+
             'add items': {"de": {"items": u"neue Gegenstände hinzufügen"
                                    },
                            "de": {"items":"add new items"
@@ -662,6 +476,14 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
           "sbox":{"de": "umgebender Kasten",
                    "en": "surrounding box"
                    },
+          "length": {"de": "Länge",
+                     "en": "length",
+                     },
+          "width": {"de":"Breite",
+                     "en":"width",
+                     },
+          "height": {"de":"Höhe",
+                     "en":"height"}
           }
 
 invedtacts = {"de": [u"wählen", u"ausgerüstet", "unausgerüstet"],
@@ -700,82 +522,22 @@ errmsg = {'no_file': {'de': 'Datei existiert nicht!',
                         'en': 'The belonging stucture file has to be\n'\
                                 'loaded first!',
                         },
-          'wrong_stat': {'de': 'Falscher Attributswert: \n\n'\
-                                 'er muss mindestens 20 bei normalen und 90 bei \n'\
-                                 'prim\xc3\xa4ren Attributen (+) betragen!',
-                          'en': 'Wrong attibute value:\n\n'\
-                                 'it must have a min of 20 concerning standard and\n'\
-                                 '90 concerning primary attributes (+)!'
-                          },
-          'too_much_stats':{'de': 'Die vorhandenen Punkte f\xc3\xbcr Attribute wurden \xc3\xbcberschritten.\n'\
-                                 'Bitte die Temp. Werte reduzieren!',
-                          'en': 'Used too much points for attributes. Plese reduce values of\n'\
-                                 'Temp. Stats!'
-                          },
-          'stats_dp': {'de': 'Der Entwicklungspunktestand f\xc3\xbcr die Attribute ist nicht Null!\n'\
-                                'Bringe ihn auf Null und dann geht es hier weiter.',
-                        'en': 'The developing points for the attributes are not zero!\n'\
-                               'Correct that and it goes on.'
-                        },
-          'player': {'de': "Bitte Spielernamen eingeben",
-                     'en': "Please enter player's name",
-                     },
-          'name': {'de': "Bitte einen Charakternamen eingeben",
-                    'en': "Please enter a character name"
-                    },
           'double': {'de': "Bitte nochmal kontrollieren: eine Auswahl ist doppelt!",
                       'en': "Please check it again: one of your choices is double!",
                       },
-          'no_race': {'de': "Bitte erst eine Rasse auswählen!",
-                       'en': "Please chose a race first!"
-                       },
 
           }
 
 ##@var infomsg
 #Simply some info messages for the help window
-infomsg = {'help_info': {'de': 'F\xc3\xbcr eine genauere Information '\
-                                 '\xc3\xbcber die '\
+infomsg = {'help_info': {'de': 'Für eine genauere Information '\
+                                 'über die '\
                                  'einzelnen Standardelemente bitte auf das '\
-                                 'Hilfe-Men\xc3\xbc klicken.',
+                                 'Hilfe-Menü klicken.',
                           'en': 'For a more detailed information about the '\
                                  'default elements please click the help menu.',
                          }
            }
-
-##@var s_elem_def
-#Descriptions of the default elements for calculating EPs from.
-s_elem_def = {'CRITICAL': {'de': 'Ausgeteilte kritische Treffer',
-                            'en': 'Caused Critical',
-                           },
-              'HITS': {'de': 'Erhaltene Trefferpunkte',
-                            'en': 'Gained hit points.',
-                            },
-              'H_CRITS': {'de': 'Erhaltene kritische Treffer',
-                            'en': 'Gained Criticals',
-                           },
-              'SPELL': {'de': 'Stufe angewendeter Zauber',
-                            'en': 'Level of used spell',
-                           },
-              'MANEUVER': {'de': 'Erfolgreiche Man\xc3\xb6ver',
-                           'en': 'Successful maneuver',
-                           },
-              'TRAVEL': {'de': 'Reisestrecke',
-                           'en': 'Traveled distance',
-                            },
-              'KILLED': {'de': 'Get\xc3\xb6tete Gegner',
-                            'en': 'Killed enemies/monster',
-                            },
-              'INDIVIDUAL': {'de': 'Individuelle Punkte.',
-                              'en': 'Individual EPs',
-                             },
-              'IDEAS': {'de': "Ideen",
-                             'en': "Ideas"
-                             },
-              'COUNT': {'de': "Anzahl",
-                             'en': "number"
-                             },
-              }
 
 #----------------------------------------------------------------------------
 # comming from Treasure/MagicItem Generator

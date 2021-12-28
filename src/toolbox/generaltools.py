@@ -12,13 +12,14 @@ In this module are alle the tools of more or less 'general purpose' collected.
 \version 0.1
 '''
 __version__ = "0.1"
-__updated__ = "12.11.2021"
+__updated__ = "28.12.2021"
 __author__ = "Marcus Schwamberger"
 
 from math import trunc
 import random as rd
 import csv
 import os
+from glob import glob
 
 
 
@@ -33,15 +34,18 @@ def dice(sides = 100, start = 1):
 
     return rd.randint(start, sides)
 
+
+
 def roll():
     """!
     This functions simulates a d100 roll with two d10 and delivers the result.
 
     @return a random numbers from 00 to 99.
     """
-    tens = rd.randint(0,9) * 10
-    ones = rd.randint(0,9)
-    return tens+ones
+    tens = rd.randint(0, 9) * 10
+    ones = rd.randint(0, 9)
+    return tens + ones
+
 
 
 def getIntOfNumber(number):
@@ -53,11 +57,13 @@ def getIntOfNumber(number):
     @raise ValueError if parameter is neither float nor int
     @return int value of the number. Floating point numbers will be truncated towards zero.
     """
-    if (not isinstance(number,(float,int))):
+    if (not isinstance(number, (float, int))):
         raise ValueError(f"Parameter is not a number - {type(number)} = {number}")
     elif isinstance(number, float):
         number = trunc(number)
     return number
+
+
 
 # function to load all kinds of table csv files
 def textFileReader(tablenumber = 100):
@@ -67,7 +73,9 @@ def textFileReader(tablenumber = 100):
     @param number of table to load suitable csv filename
     @return csv file content
     """
-    return open(os.path.join("./src/data/tables","tab_"+str(tablenumber)+".csv"), "r")
+    return open(os.path.join("./src/data/tables", "tab_" + str(tablenumber) + ".csv"), "r")
+
+
 
 def readTable(filename = ""):
     """!
@@ -124,4 +132,17 @@ def list3int(ilist = []):
     """
     result = list(map(int, ilist))
     result = result.sort()
+    return result
+
+
+
+def filesInDir(folder = "./", filenames = "*.json"):
+    """!
+    This function returns a list of file noames of a given type in a given directory.
+    @param folder to search for file names
+    @param filenames structure of the filenames as string.
+    @retval result list of found filenames in directory (or empty)
+    """
+    result = glob(folder + filenames)
+
     return result

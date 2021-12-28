@@ -13,7 +13,7 @@ This is a tool to build room prototype files by GUI.
 \version 0.1
 '''
 __version__ = "0.1"
-__updated__ = "30.11.2021"
+__updated__ = "28.12.2021"
 __author__ = "Marcus Schwamberger"
 __me__ = "room prototype constructor"
 
@@ -23,8 +23,13 @@ import tkinter as tk
 from tkinter import filedialog, Text
 from tkinter.ttk import Combobox
 from pprint import pprint
+import copy as cp
+from random import randint
+
 from gui.window import *
 from toolbox.confbox import handleConf
+from toolbox.generaltools import filesInDir
+from generatortools.definitions import roomcategory
 
 
 
@@ -40,8 +45,8 @@ class rgWindow(blankWindow):
         @param lang The chosen language for window's and button's
                     texts. At the moment, only English (en, default
                     value) and German (de) are supported.
-        @param charlist list of dictionaries holding: player, charname, EPs
-        @param datapath path for storing the data into the character files.
+        @param roompath path for storing the room's data (templates) into
+        @param datapath path for storing the general data into.
         """
 
         ## @var self.lang
@@ -60,14 +65,24 @@ class rgWindow(blankWindow):
             self.roompath = f"{self.datapath}/rooms"
 
         with open(f"{self.roompath}/R-0_generic_room.json") as fp:
+            ##\var self._genericroom
+            # this holds a prototype/generic room (loaded from file)
             self._genericroom = json.load(fp)
+
+        ##\var self.room
+        # this attribute holds the current room data (dict/JSON)
+        self.room = cp.deepcopy(self._genericroom)
 
         ## @var self.prefix
         # file prefix for type of room:
-        # - 'R_': room
-        # - 'C_': corridor
-        self.prefix = "R_"
+        # - 'R-': room
+        # - 'C-': corridor
+        # - 'T-': Trap
+        # - 'S-' : Special
+        # - 'D-' : Door
+        self.prefix = "R-"
 
+        self.initialfilename = "dummy.json"
         #
         blankWindow.__init__(self, self.lang)
         self.window.title(wintitle["room builder"][self.lang])
@@ -158,9 +173,11 @@ class rgWindow(blankWindow):
         '''!
         This opens a file dialog window for saving
         '''
+        self.updateRoomdata()
         savedir = filedialog.asksaveasfilename(defaultextension = ".json",
                                                filetypes = [("Room Files", ".json")],
-                                               initialdir = self.roompath)
+                                               initialdir = self.roompath,
+                                               initialfile = self.initialfilename)
         with open(savedir, "w") as fp:
             json.dump(self.room, fp, indent = 4)
 
@@ -175,12 +192,177 @@ class rgWindow(blankWindow):
         with open(opendir, "r") as fp:
             self.room = json.load(fp)
 
+        self.updateDisplay()
+
 
     def __quit(self):
         '''!
         This method closes the window
         '''
         self.window.destroy()
+
+
+    def __getRoomList(self):
+        """!
+        This method gets all defined rooms in the default room data directory by name:
+         - R_<id & name>.json (Room)
+         - C_<id & name>.json (corridor)
+         - S_<id & name>.json (speciality)
+         - T_<id & name>.json <trap>
+
+
+         ----
+         @todo this has to be fully implemented
+         - finding all files by regex
+         - build a list of rooms
+        """
+
+        ## \var self roomdefs
+        # this contains a list of predefined room names
+        self.roomdefs = filesInDir(folder = self.roompath, filenames = "R_*.json") + \
+                        filesInDir(folder = self.roompath, filenames = "C_*.json")
+
+
+    def _getRandom(self):
+        """!
+        This evaluates random numbers for width & length of a room if there are ranges
+        given.
+        """
+        coords = {}
+        max = [0, 0]
+
+        for c in range(0, len(self.room["corners"])):
+
+            for i in range(0, 2):
+
+                if type(self.room["corners"][c][i]) != int:
+
+                    if type(self.room["corners"][c][i]) == str:
+
+                        if "=" in self.room["corners"][c][i]:
+                            key, value = self.room["corners"][c][i].split("=")
+
+                            if "-" in value:
+                                lower, upper = value.split("-")
+                                value = randint(int(lower), int(upper))
+
+                            else:
+                                value = int(value)
+
+                            coords[key] = value
+                            self.room["corners"][c][i] = value
+                            if max[i] < value:
+                                max[i] = value
+
+                        if self.room["corners"][c][i] in coords.keys():
+                            self.room["corners"][c][i] = coords[self.room["corners"][c][i]]
+                else:
+                    if max[i] < self.room["corners"][c][i]:
+                        max[i] = self.room["corners"][c][i]
+
+        if max != [0, 0]:
+            self.room["box coords"][1][1] = max[1]
+            self.room["box coords"][2][0] = max[0]
+            self.room["box coords"][3] = max
+        self.updateDisplay()
+
+
+    def __determineBox(self):
+        """!
+        This calculates the corners of the surrounding box
+        """
+        max = [0, 0]
+        origin = self.room["corners"][0]
+        for c in range(0, len(self.room["corners"])):
+
+            if origin[0] >= self.room["corners"][c][0] and origin[1] >= self.room["corners"][c][1]:
+                origin = self.room["corners"][c]
+
+            for i in range(0, 2):
+
+                if max[i] <= self.room["corners"][c][i]:
+                    max[i] = self.room["corners"][c][i]
+
+        self.room["origin"] = cp.deepcopy(origin)
+
+        if max != [0, 0]:
+            self.room["box coords"][1][1] = max[1]
+            self.room["box coords"][2][0] = max[0]
+            self.room["box coords"][3] = max
+
+        self.updateDisplay()
+
+
+    def updateRoomdata(self):
+        """!
+        This updates all room data in self.room and the self.initialfilename.
+
+        ----
+        @todo this has to be implemented fully
+         - <strike>set self.initialfilename</strike>
+         - get all Entry field changes
+        """
+        #self._getRandom()
+
+        self.room["id"] = self.id.get()
+        self.room["name"] = self.name.get()
+        self.room["room type"] = self.selectType.get()
+        self.room["shape"] = self.selectShape.get()
+        name = self.room["name"].replace(" ", "_")
+        self.initialfilename = f'{self.room["id"]}_{name}.json'
+        self.__determineBox()
+
+
+    def updateDisplay(self):
+        """!
+        This updates all displayed data
+
+        ----
+        @todo this has to be fully implemented:
+        # <strike>update corners</strike>
+        # <strike>update id</strike>
+        # <strike>update name</strike>
+        # <strike>update surrounding box</strike>
+        # update description
+        # <strike>update room type</strike>
+        # <strike>update shape</strike>
+        # update number of doors
+        # update doors
+        # update openings
+        # update assets
+        # update inhabitants
+        # update treasures
+        """
+        self.id.set(str(self.room["id"]))
+        self.rwidth.set(str(self.room["box coords"][3][0]))
+        self.rlength.set(str(self.room["box coords"][3][1]))
+        self.rcorners.set(str(self.room["corners"]))
+        self.selectShape.set(self.room["shape"])
+        self.selectType.set(self.room["room type"])
+
+
+    def _updateCorners(self):
+        """!
+        This method parses a list from the corners' Entry field.
+        """
+        stringlist = self.rcorners.get()
+
+        stringlist = stringlist[1:-1].split("],")
+
+        for i in range(0, len(stringlist)):
+            stringlist[i] = stringlist[i].strip("[]' ")
+            stringlist[i] = stringlist[i].split(",")
+
+            for j in range(0, len(stringlist[i])):
+                stringlist[i][j] = stringlist[i][j].strip("[]' ")
+
+                try:
+                    stringlist[i][j] = int(stringlist[i][j])
+                except:
+                    pass
+        self.room["corners"] = cp.deepcopy(stringlist)
+        self.updateRoomdata()
+        self.updateDisplay()
 
 
     def __newRoom(self):
@@ -193,7 +375,7 @@ class rgWindow(blankWindow):
         self.notdoneyet("__newRoom")
 
 
-    def __latestID(self, prefix = "R_"):
+    def __latestID(self, prefix = "R-"):
         """!
         This gets the highest prototype file ID from self.roompath
 
@@ -263,18 +445,64 @@ class rgWindow(blankWindow):
               text = f" {labels['size'][self.lang]} ({labels['sbox'][self.lang]}):"
               ).grid(row = 1, column = 0, columnspan = 2, sticky = W)
         self
+
+        Label(self.window,
+              text = f"{labels['width'][self.lang]}: "
+              ).grid(row = 1, column = 2, sticky = W)
+
+        self.rwidth = StringVar()
+        self.rwidth.set(self._genericroom["corners"][1][0])
+        Entry(self.window,
+              textvariable = self.rwidth,
+              width = 10
+              ).grid(row = 1, column = 3, sticky = "WE")
+
+        Label(self.window,
+              text = f"{labels['length'][self.lang]}: "
+              ).grid(row = 1, column = 4, sticky = W)
+
+        self.rlength = StringVar()
+        self.rlength.set(self._genericroom["corners"][0][1])
+        Entry(self.window,
+              textvariable = self.rlength,
+              width = 10
+              ).grid(row = 1, column = 5, sticky = "WE")
+
+        Button(self.window,
+               text = txtbutton["but_roll"][self.lang],
+               command = self._getRandom
+               ).grid(row = 1, column = 6, sticky = "EW")
+
         #---------- row 2
         Label(self.window,
-              text = f"{labels['description'][self.lang]}:"
-              ).grid(row = 2, column = 0, sticky = "WS")
+              text = labels["corners"][self.lang] + ": "
+              ).grid(row = 2, column = 0, sticky = W)
+
+        self.rcorners = StringVar()
+        self.rcorners.set(str(self.room["corners"]))
+        Entry(self.window,
+               textvariable = self.rcorners,
+               width = 50
+               ).grid(row = 2, column = 1, columnspan = 5, sticky = "EW")
+
+        Button(self.window,
+               text = txtbutton["but_take"][self.lang],
+               command = self._updateCorners
+               ).grid(row = 2, column = 6, sticky = "EW")
+
         #---------- row 3
+
+        #---------- row 5
+        Label(self.window,
+              text = f"{labels['description'][self.lang]}:"
+              ).grid(row = 5, column = 0, sticky = "WS")
         #self.description = StringVar()
         #self.description.set(self._genericroom["description"])
         self.__descrText = Text(self.window,
                                 height = 20,
                                 width = 90
                                 )
-        self.__descrText.grid(row = 3, column = 0,
+        self.__descrText.grid(row = 5, column = 0,
                                        columnspan = 8,
                                        sticky = "NEWS")
         #self.__descrText.insert(tk.END, self._genericroom["description"])

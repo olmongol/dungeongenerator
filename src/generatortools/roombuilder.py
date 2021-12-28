@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''!
-\package toolbox.roombuilder
+\package generatortools.roombuilder
 
 \brief Tools for building/handling rooms
 
@@ -26,8 +26,10 @@ import json
 import os
 from toolbox.logbox import *
 from toolbox.confbox import *
+from generatortools.definitions import roomcategory
+
 __version__ = "0.1"
-__updated__ = "14.11.2021"
+__updated__ = "28.12.2021"
 __author__ = "Marcus Schwamberger"
 
 cfg = handleConf()
