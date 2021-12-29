@@ -15,7 +15,7 @@
 @todo the following has to be fully implemented
 - class for rooms
 - class for corridors
-- class for doors/access points
+- class for doors/entrances
 - class for random table handling
 - class for encounter handling/interface
 - class for treaure handling/interface
@@ -29,7 +29,7 @@ from toolbox.confbox import *
 from generatortools.definitions import roomcategory
 
 __version__ = "0.1"
-__updated__ = "28.12.2021"
+__updated__ = "29.12.2021"
 __author__ = "Marcus Schwamberger"
 
 cfg = handleConf()
@@ -55,12 +55,12 @@ class room():
     - absolute coordinates of the bounding box's left upper corner point (starting point)
     - relative coordinates of the room shape (for svg output, maybe even added some
       more SVG options or code snippets)
-    - doors/access points with coordinates, orientation and linked rooms/corridors
+    - doors/entrances with coordinates, orientation and linked rooms/corridors
 
     and it should have the following methods:
     - method to get all room attributes from saved proto type data files at the
       construction of the room object
-    - marking access points/doors on the surrounding box
+    - marking entrances/doors on the surrounding box
     - turn the room for given degrees and adapt the surrounding box
     - size the room by a given factor and adapt the surrounding box
 

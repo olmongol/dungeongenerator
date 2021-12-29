@@ -42,11 +42,8 @@
         "F": [],
         "G": []
     },
-    "access point": {
-        "number": [
-            "1-4",
-            "door"
-        ],
+    "entrance": {
+        "number": "1-4",
         "doors": [],
         "openings": []
     },

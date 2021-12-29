@@ -13,7 +13,7 @@ This is a tool to build room prototype files by GUI.
 \version 0.1
 '''
 __version__ = "0.1"
-__updated__ = "28.12.2021"
+__updated__ = "29.12.2021"
 __author__ = "Marcus Schwamberger"
 __me__ = "room prototype constructor"
 
@@ -134,6 +134,16 @@ class rgWindow(blankWindow):
         @todo has to be implemented fully
         '''
         self.notdoneyet("__drawroom")
+
+
+    def _displayRoom(self):
+        '''!
+        This displays a  default graphic of the room.
+
+        ----
+        @todo this has to be fully implemented
+        '''
+        self.notdoneyet("__displayRoom")
 
 
     def __addparam(self):
@@ -309,6 +319,7 @@ class rgWindow(blankWindow):
         self.room["room type"] = self.selectType.get()
         self.room["shape"] = self.selectShape.get()
         name = self.room["name"].replace(" ", "_")
+        self.room["description"] = self.__descrText.get("1.0", END)
         self.initialfilename = f'{self.room["id"]}_{name}.json'
         self.__determineBox()
 
@@ -339,6 +350,8 @@ class rgWindow(blankWindow):
         self.rcorners.set(str(self.room["corners"]))
         self.selectShape.set(self.room["shape"])
         self.selectType.set(self.room["room type"])
+        self.__descrText.delete("1.0", END)
+        self.__descrText.insert(END, self.room["description"])
 
 
     def _updateCorners(self):
@@ -473,6 +486,11 @@ class rgWindow(blankWindow):
                command = self._getRandom
                ).grid(row = 1, column = 6, sticky = "EW")
 
+        Button(self.window,
+               text = txtbutton["but_draw"][self.lang],
+               command = self.__drawroom
+               ).grid(row = 1, column = 7, sticky = "EW")
+
         #---------- row 2
         Label(self.window,
               text = labels["corners"][self.lang] + ": "
@@ -490,8 +508,44 @@ class rgWindow(blankWindow):
                command = self._updateCorners
                ).grid(row = 2, column = 6, sticky = "EW")
 
-        #---------- row 3
+        Button(self.window,
+               text = txtbutton["but_show"][self.lang],
+               command = self._displayRoom
+               ).grid(row = 2, column = 7, sticky = "EW")
 
+        #---------- row 3
+        Label(self.window,
+              text = f"{labels['entrance'][self.lang]}: "
+              ).grid(row = 3, column = 0, sticky = W)
+
+        self.entrances = StringVar()
+        self.entrances.set(str(self._genericroom["entrance"]["number"]))
+        Entry(self.window,
+              textvariable = self.entrances,
+              width = 7
+              ).grid(row = 3, column = 1, sticky = "WE")
+
+        self.doors = IntVar()
+        if "doors" in self._genericroom["entrance"].keys():
+            self.doors.set(1)
+        else:
+            self.doors.set(0)
+
+        Checkbutton(self.window,
+                    text = labels["door"][self.lang],
+                    variable = self.doors
+                    ).grid(row = 3, column = 2, sticky = W)
+
+        self.openings = IntVar()
+        if "openings" in self._genericroom["entrance"].keys():
+            self.openings.set(1)
+        else:
+            self.openings.set(0)
+
+        Checkbutton(self.window,
+                    text = labels["corridor"][self.lang],
+                    variable = self.openings
+                    ).grid(row = 3, column = 3, sticky = W)
         #---------- row 5
         Label(self.window,
               text = f"{labels['description'][self.lang]}:"
@@ -512,7 +566,4 @@ class rgWindow(blankWindow):
 
 if __name__ == '__main__':
     cfg = handleConf("data/config.ini")
-    #-------------- DEBUG
-    #pprint(cfg.config.sections())
-    #pprint(cfg.config.items("DEFAULT"))
     builder = rgWindow(lang = cfg.config["DEFAULT"]["language"], datapath = cfg.config["DEFAULT"]["datapath"])

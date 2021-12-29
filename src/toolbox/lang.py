@@ -22,7 +22,7 @@ Currently supported languages are:
 @license GNU V3.0
 '''
 __version__ = "1.1"
-__updated__ = "28.12.2021"
+__updated__ = "29.12.2021"
 ##
 # @var supportedrpg
 # Supported RPG systems
@@ -149,6 +149,12 @@ txtbutton = {'but_ok': {'de': 'OK',
              "but_details": {"de":"Details",
                               "en":"details"
                               },
+             "but_show": {"de": "Anzeigen",
+                          "en": "show",
+                          },
+             "but_draw": {"de": "Zeichnen",
+                          "en": "draw"
+                          }
 
              }
 
@@ -483,7 +489,16 @@ labels = {'cfg_path': {'de': 'Speicherpfad f\xc3\xbcr die Konfigurationsdatei',
                      "en":"width",
                      },
           "height": {"de":"Höhe",
-                     "en":"height"}
+                     "en":"height"
+                     },
+          "entrance": {"de": "Zugang",
+                       "en": "entrance"
+                       },
+          "door":{"de": "Tür/Tor",
+                   "en": "door/gate"},
+          "corridor": {"de":"Gang/öffnung",
+                        "en": "corridor/opening",
+                        },
           }
 
 invedtacts = {"de": [u"wählen", u"ausgerüstet", "unausgerüstet"],
