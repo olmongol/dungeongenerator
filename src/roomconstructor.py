@@ -13,7 +13,7 @@ This is a tool to build room prototype files by GUI.
 \version 0.1
 '''
 __version__ = "0.1"
-__updated__ = "29.12.2021"
+__updated__ = "30.12.2021"
 __author__ = "Marcus Schwamberger"
 __me__ = "room prototype constructor"
 
@@ -113,27 +113,36 @@ class rgWindow(blankWindow):
 
     def __addEditMenu(self):
         '''!
-        This method asds the edit menu to the window's menu bar
+        This method adds the edit menu to the window's menu bar
         '''
         self.editmenu = Menu(master = self.menu)
         self.menu.add_cascade(label = txtmenu["menu_edit"][self.lang],
                               menu = self.editmenu)
-        self.editmenu.add_command(label = submenu['edit'][self.lang]['draw room'],
-                                  command = self.__drawroom)
-        self.editmenu.add_command(label = submenu['edit'][self.lang]['add param'],
-                                  command = self.__addparam)
+        self.editmenu.add_command(label = submenu["edit"][self.lang]["add encounter"],
+                                  command = self.addEncounter)
+        self.editmenu.add_command(label = submenu["edit"][self.lang]["add treasure"],
+                                  command = self.addTreasure)
+        self.editmenu.add_command(label = submenu["edit"][self.lang]["add asset"],
+                                  command = self.addAssets)
         self.editmenu.add_command(label = submenu['edit'][self.lang]['add spec'],
-                                  command = self.__addspec)
+                                  command = self.__addSpecial)
+        self.editmenu.add_command(label = submenu['edit'][self.lang]['add param'],
+                                  command = self.__addParam)
+        self.editmenu.add_separator()
+        self.editmenu.add_command(label = submenu['edit'][self.lang]['display room'],
+                                  command = self._displayRoom)
+        self.editmenu.add_command(label = submenu['edit'][self.lang]['draw room'],
+                                  command = self.__drawRoom)
 
 
-    def __drawroom(self):
+    def __drawRoom(self):
         '''!
         This method opens another window to draw the room shape
 
         ----
         @todo has to be implemented fully
         '''
-        self.notdoneyet("__drawroom")
+        self.notdoneyet("__drawRoom")
 
 
     def _displayRoom(self):
@@ -146,24 +155,54 @@ class rgWindow(blankWindow):
         self.notdoneyet("__displayRoom")
 
 
-    def __addparam(self):
+    def __addParam(self):
         '''!
         This adds a parameter to the defaults of a room/corridor.
 
         ----
         @todo this has to be implemented fully
         '''
-        self.notdoneyet("__addparam")
+        self.notdoneyet("__addParam")
 
 
-    def __addspec(self):
+    def __addSpecial(self):
         '''!
         This adds a special option/item to  a room/corridor.
 
         ----
         @todo this has to be implemented fully
         '''
-        self.notdoneyet("__addspec")
+        self.notdoneyet("__addSpecial")
+
+
+    def addEncounter(self):
+        '''!
+        This method adds encounters/inhabitants to a room
+
+        ----
+        @todo this has to be implemented fully
+        '''
+        self.notdoneyet("addEncounter")
+
+
+    def addTreasure(self):
+        '''!
+        This adds a specific amount of treasure to a room
+
+        ----
+        @todo this has to be implemented fully
+        '''
+        self.notdoneyet("addTreasure")
+
+
+    def addAssets(self):
+        '''!
+        This adds a specific amount of assets like funiture to a room.
+
+        ----
+        @todo this has to be implemented fully
+        '''
+        self.notdoneyet("addAssets")
 
 
     def __addHelpMenu(self):
@@ -320,6 +359,19 @@ class rgWindow(blankWindow):
         self.room["shape"] = self.selectShape.get()
         name = self.room["name"].replace(" ", "_")
         self.room["description"] = self.__descrText.get("1.0", END)
+
+        if self.doors.get() == 1:
+            self.room["entrance"]["doors"] = []
+
+        elif self.doors.get() == 0 and "doors" in self.room["entrance"].keys():
+            del(self.room["entrance"]["doors"])
+
+        if self.openings.get() == 1:
+            self.room["entrance"]["openings"] = []
+
+        elif self.openings.get() == 0 and "openings" in self.room["entrance"].keys():
+            del(self.room["entrance"]["openings"])
+
         self.initialfilename = f'{self.room["id"]}_{name}.json'
         self.__determineBox()
 
@@ -345,6 +397,7 @@ class rgWindow(blankWindow):
         # update treasures
         """
         self.id.set(str(self.room["id"]))
+        self.name.set(str(self.room["name"]))
         self.rwidth.set(str(self.room["box coords"][3][0]))
         self.rlength.set(str(self.room["box coords"][3][1]))
         self.rcorners.set(str(self.room["corners"]))
@@ -352,6 +405,17 @@ class rgWindow(blankWindow):
         self.selectType.set(self.room["room type"])
         self.__descrText.delete("1.0", END)
         self.__descrText.insert(END, self.room["description"])
+
+        if "doors" in self.room["entrance"].keys():
+            self.doors.set(1)
+        else:
+            self.doors.set(0)
+
+        if "openings" in self.room["entrance"].keys():
+            self.openings.set(1)
+
+        else:
+            self.openings.set(0)
 
 
     def _updateCorners(self):
@@ -488,7 +552,7 @@ class rgWindow(blankWindow):
 
         Button(self.window,
                text = txtbutton["but_draw"][self.lang],
-               command = self.__drawroom
+               command = self.__drawRoom
                ).grid(row = 1, column = 7, sticky = "EW")
 
         #---------- row 2

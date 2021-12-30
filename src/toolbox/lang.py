@@ -22,7 +22,7 @@ Currently supported languages are:
 @license GNU V3.0
 '''
 __version__ = "1.1"
-__updated__ = "29.12.2021"
+__updated__ = "30.12.2021"
 ##
 # @var supportedrpg
 # Supported RPG systems
@@ -251,28 +251,22 @@ submenu = {'file':{'de':{'open': 'Datei \xc3\xb6ffnen',
                              'global': 'Handbook',
                              },
                      },
-           'edit': {'de': {'ed_char': 'Charakter bearbeiten/steigern',
-                              'ed_grp': 'Gruppe bearbeiten',
-                              'ed_fight': 'Kampf-EPs',
-                              'ed_other': 'EPs Zauber,Reisen, Man\xc3\xb6ver',
-                              'ed_indiv': 'Ideen-EPs',
-                              'ed_calc': 'Zusammenrechnen',
-                              "history": "Verlauf anzeigen",
-                              "draw room": "Raum zeichnen",
-                              "add spec": "Besonderheit hinzufügen",
-                              "add param": "Parameter himzufügen§",
-                              },
-                      'en':{'ed_char': 'Edit/improve Character',
-                              'ed_grp': 'Edit Group',
-                              'ed_fight': 'Fight EPs',
-                              'ed_other': 'EPs for Spells,Travel,Maneuver',
-                              'ed_indiv': 'EPs for ideas',
-                              'ed_calc': 'Calculate all',
-                              "history": "display history",
-                              "draw room":"draw room",
-                              "add spec": "add special",
-                              "add param": "add parameter",
-                               },
+           'edit': {'de': {"draw room": "Raum zeichnen",
+                           "display room": "Raum anzeigen",
+                          "add spec": "Besonderheit hinzufügen",
+                          "add param": "Parameter hinzufügen",
+                          "add asset": "Gegenstände hinzufügen",
+                          "add treasure": "Schätze hinzufügen",
+                          "add encounter": "Begenungen/Bewohner hnzufügen",
+                          },
+                      'en':{"draw room":"draw room",
+                            "display room": "show room",
+                            "add spec": "add special",
+                            "add param": "add parameter",
+                            "add asset": "add assets",
+                            "add treasure": "add treasure",
+                            "add encounter": "add encounter/inhabitants",
+                            },
 
                       },
 
