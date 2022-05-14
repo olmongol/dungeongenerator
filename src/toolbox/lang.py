@@ -338,7 +338,11 @@ wintitle = {'opt_lang': {'de': 'Spracheinstellungen',
                      'en': 'Dungeon Generator',
                      },
             'room builder': {'de': 'Raum Prototyp Generator',
-                              'en': 'Room Prototype Constructor'}
+                              'en': 'Room Prototype Constructor'
+                              },
+            'add encounter': {"de": "Begnungen/Bewohner hinzufügen",
+                              "en": "add encounter/inhabitants"
+                              },
             }
 
 ## @var labels

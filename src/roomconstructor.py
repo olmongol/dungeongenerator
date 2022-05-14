@@ -10,10 +10,10 @@ This is a tool to build room prototype files by GUI.
 \copyright GNU V3.0
 \author Marcus Schwamberger
 \email marcus@lederzeug.de
-\version 0.1
+\version 0.2
 '''
-__version__ = "0.1"
-__updated__ = "30.12.2021"
+__version__ = "0.2"
+__updated__ = "14.05.2022"
 __author__ = "Marcus Schwamberger"
 __me__ = "room prototype constructor"
 
@@ -291,8 +291,8 @@ class rgWindow(blankWindow):
                         if "=" in self.room["corners"][c][i]:
                             key, value = self.room["corners"][c][i].split("=")
 
-                            if "-" in value:
-                                lower, upper = value.split("-")
+                            if "..." in value:
+                                lower, upper = value.split("...")
                                 value = randint(int(lower), int(upper))
 
                             else:
@@ -351,7 +351,6 @@ class rgWindow(blankWindow):
          - <strike>set self.initialfilename</strike>
          - get all Entry field changes
         """
-        #self._getRandom()
 
         self.room["id"] = self.id.get()
         self.room["name"] = self.name.get()
@@ -359,7 +358,7 @@ class rgWindow(blankWindow):
         self.room["shape"] = self.selectShape.get()
         name = self.room["name"].replace(" ", "_")
         self.room["description"] = self.__descrText.get("1.0", END)
-
+        self.room["entrance"]["number"] = self.entrances.get()
         if self.doors.get() == 1:
             self.room["entrance"]["doors"] = []
 
@@ -405,9 +404,11 @@ class rgWindow(blankWindow):
         self.selectType.set(self.room["room type"])
         self.__descrText.delete("1.0", END)
         self.__descrText.insert(END, self.room["description"])
+        self.entrances.set(str(self.room["entrance"]["number"]))
 
         if "doors" in self.room["entrance"].keys():
             self.doors.set(1)
+
         else:
             self.doors.set(0)
 
@@ -503,7 +504,8 @@ class rgWindow(blankWindow):
         self.selectType.set(self._genericroom["room type"])
         self.__typeCombo = Combobox(self.window,
                                    textvariable = self.selectType,
-                                   values = labels["room types"][self.lang])
+                                   #values = labels["room types"][self.lang])
+                                   values = roomcategory[self.lang])
         self.__typeCombo.grid(row = 0, column = 5, sticky = W)
 
         Label(self.window,
@@ -614,8 +616,6 @@ class rgWindow(blankWindow):
         Label(self.window,
               text = f"{labels['description'][self.lang]}:"
               ).grid(row = 5, column = 0, sticky = "WS")
-        #self.description = StringVar()
-        #self.description.set(self._genericroom["description"])
         self.__descrText = Text(self.window,
                                 height = 20,
                                 width = 90
@@ -623,11 +623,36 @@ class rgWindow(blankWindow):
         self.__descrText.grid(row = 5, column = 0,
                                        columnspan = 8,
                                        sticky = "NEWS")
-        #self.__descrText.insert(tk.END, self._genericroom["description"])
         self.__descrText.insert(END, self._genericroom["description"])
 
 
 
-if __name__ == '__main__':
+class drawRoomWin(blankWindow):
+    '''!
+    This class generates a window for drawing,loading and saving room shapes and styles.
+    '''
+
+
+    def __init__(self, lang = "en", datapath = "./data", roompath = ""):
+        '''!
+        Constructor: Drawing window for room shapes / styles
+        @param lang configured language (default: en)
+        @param datapath configured data path (default: ./data)
+        @param roompath configured room path (default: "" - not configured)
+        '''
+
+        self.dpath = datapath
+        self.lang = lang
+        self.roompath = roompath
+
+
+
+def main():
     cfg = handleConf("data/config.ini")
     builder = rgWindow(lang = cfg.config["DEFAULT"]["language"], datapath = cfg.config["DEFAULT"]["datapath"])
+
+
+
+if __name__ == '__main__':
+    main()
+

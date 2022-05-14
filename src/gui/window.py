@@ -16,12 +16,12 @@ from toolbox.lang import *
 from toolbox import logbox as log
 
 __author__ = "Marcus Schwamberger"
-__updated__ = "28.12.2021"
+__updated__ = "30.12.2021"
 __copyright__ = "(C) 2021-{} {}".format(__updated__[-4:], __author__)
 __email__ = "marcus@lederzeug.de"
 __version__ = "1.0"
 __license__ = "GNU V3.0"
-__me__ = "A RPG tool package for Python 3"
+__me__ = "A RPG dungeon tool package for Python 3"
 
 logger = log.createLogger('window', 'warning', '1 MB', 1, './')
 
