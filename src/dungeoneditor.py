@@ -1,4 +1,4 @@
-from classes.table import Table
+from dgtools.tablehandling import Table
 from toolbox.generaltools import roll
 
 if __name__ == '__main__':
